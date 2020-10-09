@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  Button,
+  AsyncStorage,
   TextInput,
   Platform,
   View,
@@ -11,7 +11,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {Formik, getIn} from 'formik';
+import { Formik, getIn } from 'formik';
 import * as Yup from 'yup';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -23,14 +23,17 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {SIZES, FONTS, COLORS} from '../../contants';
+
+
+import { SIZES, FONTS, COLORS } from '../../contants';
+
 
 type PropsLogin = {
   navigation?: any;
 };
 
 
-const Login: React.FC<PropsLogin> = ({navigation}) => {
+const Login: React.FC<PropsLogin> = ({ navigation }) => {
   const initialState = {
     email: '',
     password: '',
@@ -105,9 +108,7 @@ const Login: React.FC<PropsLogin> = ({navigation}) => {
     password: string;
   };
 
-  const loginHandle = ({email, password}: PropsLogin): any => {
-    navigation.navigate('MainApp');
-  };
+
 
   const SignInSchema = Yup.object().shape({
     userInfo: Yup.object().shape({
@@ -119,9 +120,22 @@ const Login: React.FC<PropsLogin> = ({navigation}) => {
     }),
   });
 
-  const handleSubmit = (values : any): any => {
-    console.log(values, 'values');
-    navigation.navigate('MainApp');
+  const _storeData = async () => {
+    try {
+      await AsyncStorage.setItem(
+        'token',
+        'adaTokenya.'
+      );
+    } catch (error) {
+      throw (error)
+    }
+  };
+
+  const handleSubmit = (values: any): any => {
+    _storeData()
+    navigation.navigate('DrawerNavigator', {
+      screen: "DashBoard"
+    });
   };
 
   return (
@@ -134,13 +148,8 @@ const Login: React.FC<PropsLogin> = ({navigation}) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Formik
             initialValues={userInfo}
-            onSubmit={(values, actions) => {
-        setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
-      }}
-            validationSchema={SignInSchema}>
+            onSubmit={handleSubmit}
+          >
             {({
               values,
               touched,
@@ -152,120 +161,120 @@ const Login: React.FC<PropsLogin> = ({navigation}) => {
               handleSubmit,
               handleReset,
             }) => (
-              <View>
-                <View style={styles.action}>
-                  <FontAwesome name="user-o" color={COLORS.text} size={20} />
-                  <TextInput
-                    placeholder="Your Email"
-                    placeholderTextColor="#666666"
-                    style={[
-                      styles.textInput,
-                      {
-                        color: COLORS.text,
-                      },
-                    ]}
-                    autoCapitalize="none"
-                    onChangeText={handleChange('userInfo.email')}
-                    onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
-                  />
+                <View>
+                  <View style={styles.action}>
+                    <FontAwesome name="user-o" color={COLORS.text} size={20} />
+                    <TextInput
+                      placeholder="Your Email"
+                      placeholderTextColor="#666666"
+                      style={[
+                        styles.textInput,
+                        {
+                          color: COLORS.text,
+                        },
+                      ]}
+                      autoCapitalize="none"
+                      onChangeText={handleChange('userInfo.email')}
+                      onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
+                    />
+                    {getIn(errors, 'userInfo.email') &&
+                      getIn(touched, 'userInfo.email') ? null : (
+                        <Animatable.View animation="bounceIn">
+                          <Feather name="check-circle" color="green" size={20} />
+                        </Animatable.View>
+                      )}
+                  </View>
                   {getIn(errors, 'userInfo.email') &&
-                  getIn(touched, 'userInfo.email') ? null : (
-                    <Animatable.View animation="bounceIn">
-                      <Feather name="check-circle" color="green" size={20} />
-                    </Animatable.View>
-                  )}
-                </View>
-                {getIn(errors, 'userInfo.email') &&
-                  getIn(touched, 'userInfo.email') && (
-                    <Animatable.View animation="fadeInLeft" duration={500}>
-                      <Text style={styles.errorMsg}>{errors.email}</Text>
-                    </Animatable.View>
-                  )}
-
-                <View style={styles.action}>
-                  <Feather name="lock" color={COLORS.text} size={20} />
-                  <TextInput
-                    placeholder="Your Password"
-                    placeholderTextColor="#666666"
-                    secureTextEntry={userInfo.secureTextEntry ? true : false}
-                    style={[
-                      styles.textInput,
-                      {
-                        color: COLORS.text,
-                      },
-                    ]}
-                    autoCapitalize="none"
-                    onChangeText={handleChange('userInfo.password')}
-                  />
-
-                  <TouchableOpacity onPress={updateSecureTextEntry}>
-                    {userInfo.secureTextEntry ? (
-                      <Feather name="eye-off" color="grey" size={20} />
-                    ) : (
-                      <Feather name="eye" color="grey" size={20} />
+                    getIn(touched, 'userInfo.email') && (
+                      <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>{errors.email}</Text>
+                      </Animatable.View>
                     )}
-                  </TouchableOpacity>
-                </View>
-                {getIn(errors, 'userInfo.password') &&
-                  getIn(touched, 'userInfo.password') && (
-                    <Animatable.View animation="fadeInLeft" duration={500}>
-                      <Text style={styles.errorMsg}>{errors.password}</Text>
-                    </Animatable.View>
-                  )}
 
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('Authentication', {
-                      screen: 'ForgotPassword',
-                    })
-                  }>
-                  <Text style={{color: COLORS.primary, marginTop: 15}}>
-                    Forgot password?
-                  </Text>
-                </TouchableOpacity>
+                  <View style={styles.action}>
+                    <Feather name="lock" color={COLORS.text} size={20} />
+                    <TextInput
+                      placeholder="Your Password"
+                      placeholderTextColor="#666666"
+                      secureTextEntry={userInfo.secureTextEntry ? true : false}
+                      style={[
+                        styles.textInput,
+                        {
+                          color: COLORS.text,
+                        },
+                      ]}
+                      autoCapitalize="none"
+                      onChangeText={handleChange('userInfo.password')}
+                    />
 
-                <View style={styles.button}>
+                    <TouchableOpacity onPress={updateSecureTextEntry}>
+                      {userInfo.secureTextEntry ? (
+                        <Feather name="eye-off" color="grey" size={20} />
+                      ) : (
+                          <Feather name="eye" color="grey" size={20} />
+                        )}
+                    </TouchableOpacity>
+                  </View>
+                  {getIn(errors, 'userInfo.password') &&
+                    getIn(touched, 'userInfo.password') && (
+                      <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>{errors.password}</Text>
+                      </Animatable.View>
+                    )}
+
                   <TouchableOpacity
-                    style={styles.signIn}
-                    onPress={handleSubmit as any}>
-                    <LinearGradient
-                      colors={[COLORS.primary, COLORS.primary]}
-                      style={styles.signIn}>
+                    onPress={() =>
+                      navigation.navigate('Authentication', {
+                        screen: 'ForgotPassword',
+                      })
+                    }>
+                    <Text style={{ color: COLORS.primary, marginTop: 15 }}>
+                      Forgot password?
+                  </Text>
+                  </TouchableOpacity>
+
+                  <View style={styles.button}>
+                    <TouchableOpacity
+                      style={styles.signIn}
+                      onPress={handleSubmit as any}>
+                      <LinearGradient
+                        colors={[COLORS.primary, COLORS.primary]}
+                        style={styles.signIn}>
+                        <Text
+                          style={[
+                            styles.textSign,
+                            {
+                              color: '#fff',
+                            },
+                          ]}>
+                          Sign In
+                      </Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('MainApp')}
+                      style={[
+                        styles.signIn,
+                        {
+                          borderColor: COLORS.primary,
+                          borderWidth: 1,
+                          marginTop: 15,
+                        },
+                      ]}>
                       <Text
                         style={[
                           styles.textSign,
                           {
-                            color: '#fff',
+                            color: COLORS.primary,
                           },
                         ]}>
-                        Sign In
-                      </Text>
-                    </LinearGradient>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('MainApp')}
-                    style={[
-                      styles.signIn,
-                      {
-                        borderColor: COLORS.primary,
-                        borderWidth: 1,
-                        marginTop: 15,
-                      },
-                    ]}>
-                    <Text
-                      style={[
-                        styles.textSign,
-                        {
-                          color: COLORS.primary,
-                        },
-                      ]}>
-                      Sign Up
+                        Sign Up
                     </Text>
-                  </TouchableOpacity>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            )}
+              )}
           </Formik>
 
           {/* <DebugFormik /> */}

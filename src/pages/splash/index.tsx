@@ -1,8 +1,8 @@
-import React, {Component, useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, { Component, useEffect } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 // import {Logo} from '../../assets/icons';
 
-const SplashScreen = ({navigation}: any) => {
+const SplashScreen = ({ navigation }: any) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('OnBoarding');
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F1F6FC',
   },
-  title: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  title: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   titleText: {
     fontFamily: 'Roboto',
     fontSize: 26,
