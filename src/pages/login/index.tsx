@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  AsyncStorage,
   TextInput,
   Platform,
   View,
@@ -11,6 +10,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import AsyncStorage from "@react-native-community/async-storage"
 import { Formik, getIn } from 'formik';
 import * as Yup from 'yup';
 import LinearGradient from 'react-native-linear-gradient';
@@ -123,7 +123,7 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
   const _storeData = async () => {
     try {
       await AsyncStorage.setItem(
-        'token',
+        'mahasiswa',
         'adaTokenya.'
       );
     } catch (error) {
@@ -134,7 +134,9 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
   const handleSubmit = (values: any): any => {
     _storeData()
     navigation.navigate('DrawerNavigator', {
-      screen: "DashBoard"
+      "RootDashBoard": {
+        screen: "DashBoard"
+      }
     });
   };
 
@@ -252,26 +254,7 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
                       </LinearGradient>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
-                      onPress={() => navigation.navigate('MainApp')}
-                      style={[
-                        styles.signIn,
-                        {
-                          borderColor: COLORS.primary,
-                          borderWidth: 1,
-                          marginTop: 15,
-                        },
-                      ]}>
-                      <Text
-                        style={[
-                          styles.textSign,
-                          {
-                            color: COLORS.primary,
-                          },
-                        ]}>
-                        Sign Up
-                    </Text>
-                    </TouchableOpacity>
+
                   </View>
                 </View>
               )}

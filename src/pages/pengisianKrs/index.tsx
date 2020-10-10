@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, TouchableOpacity } from 'react-native';
 
-type PropsPengisianKrs = {
-    navigation?: any
-}
+import { COLORS } from "../../contants"
+type PropsPengisianKrs = {}
 
-const PengisianKrs: React.FC<PropsPengisianKrs> = ({ navigation }) => {
+const PengisianKrs = ({ navigation }: any) => {
     const [state, setState] = useState();
 
     return (
         <View>
-            <Text>PengisianKrs Screen</Text>
+            <StatusBar backgroundColor={COLORS.primary} />
+            <TouchableOpacity onPress={() => {
+                navigation.navigate("DetailKrs")
+            }}>
+                <Text>PengisianKrs Screen</Text>
+            </TouchableOpacity>
         </View>
     );
 }
