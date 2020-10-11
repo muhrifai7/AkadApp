@@ -3,11 +3,12 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Icon from "react-native-vector-icons/AntDesign"
-
+import Icon from "react-native-vector-icons/Ionicons"
+import { View } from "react-native"
 
 import { SplashScreen, OnBoarding, Login, Ebook, RekapSpp, Dashboard, Profile, PengisianKrs, InfoUjian, Transkip, DetailKrs, CetakKartuUjian, JadwalKuliah, JadwalUjian } from '../pages';
 import DrawerContent from '../components/drawerContent';
+import { COLORS, FONTS } from "../contants"
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,7 @@ const MainApp = () => {
         name="DrawerNavigator"
         component={DrawerNavigator}
         options={{ headerShown: false }}
+
       />
     </Stack.Navigator>
   );
@@ -75,12 +77,11 @@ const RootProfile = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>)
 }
 
-const RootDashBoard = () => {
+const RootDashBoard = ({ navigation }: any) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -93,22 +94,49 @@ const RootDashBoard = () => {
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: COLORS.primary
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <View style={{ paddingLeft: 3 }}>
+              <Icon name="md-menu-outline" color="white" size={30} onPress={() => navigation.openDrawer()} />
+            </View>
+          ),
+        }}
       />
-      <Stack.Screen
-        name="Transkip"
-        component={Transkip}
-      />
+
     </Stack.Navigator>)
 }
 
-const RootPengisianKrs = () => {
+const RootPengisianKrs = ({ navigation }: any) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="PengisianKrs"
         component={PengisianKrs}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: COLORS.primary,
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <View style={{ paddingLeft: 3 }}>
+              <Icon name="md-menu-outline" color="white" size={30} onPress={() => navigation.openDrawer()} />
+            </View>
+          ),
+        }}
       />
       <Stack.Screen
         name="DetailKrs"
@@ -117,13 +145,26 @@ const RootPengisianKrs = () => {
     </Stack.Navigator>)
 }
 
-const RootTranskip = () => {
+const RootTranskip = ({ navigation }: any) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Transkip"
         component={Transkip}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: COLORS.primary,
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <Icon name="md-menu-outline" color="white" size={24} onPress={() => navigation.openDrawer()} />
+          ),
+        }}
       />
     </Stack.Navigator>)
 }
@@ -135,19 +176,18 @@ const RootInfoUjian = ({ navigation }: any) => {
       <Stack.Screen
         name="TopTabsUjian"
         component={TopTabsUjian}
-
         options={{
-          title: 'Info Kuliah Ujian',
+          title: 'Dashboard',
           headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: COLORS.primary,
           },
 
           headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: FONTS.family
           },
           headerLeft: () => (
-            <Icon name="menufold" color="black" size={24} onPress={() => navigation.openDrawer()} />
+            <Icon name="md-menu-outline" color="white" size={24} onPress={() => navigation.openDrawer()} />
           ),
         }}
       />
@@ -160,7 +200,20 @@ const RootRekapSpp = ({ navigation }: any) => {
       <Stack.Screen
         name="RekapSpp"
         component={RekapSpp}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: COLORS.primary,
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <Icon name="md-menu-outline" color="white" size={24} onPress={() => navigation.openDrawer()} />
+          ),
+        }}
       />
     </Stack.Navigator>
   )
@@ -171,7 +224,20 @@ const RootEbook = ({ navigation }: any) => {
       <Stack.Screen
         name="Ebook"
         component={Ebook}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: COLORS.primary,
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <Icon name="md-menu-outline" color="white" size={24} onPress={() => navigation.openDrawer()} />
+          ),
+        }}
       />
     </Stack.Navigator>
   )

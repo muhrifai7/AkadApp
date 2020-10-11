@@ -11,7 +11,7 @@ import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from "@react-native-community/async-storage"
 
-import { COLORS } from '../../contants';
+import { COLORS, FONTS } from '../../contants';
 
 const DrawerContent = (props: any) => {
     const [dropValue, setDropValue] = useState(false);
@@ -44,7 +44,7 @@ const DrawerContent = (props: any) => {
     const handlePress = () => setExpanded(!expanded);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.sekunder }}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
@@ -79,39 +79,49 @@ const DrawerContent = (props: any) => {
                                 }}>
                                 <List.Item
                                     title="Dashboard"
+                                    titleStyle={styles.title}
                                     left={() => (
-                                        <Icon name="home-outline" color="black" size={24} />
+                                        <Icon name="account-tie-outline" color={COLORS.primary} size={27} />
                                     )}
                                 />
                             </TouchableOpacity>
                             <List.Accordion
                                 title="Kemahasiswaan"
+                                titleStyle={styles.title}
                                 left={(props) => (
-                                    <Icon name="book-multiple-outline" color="black" size={24} />
+                                    <Icon name="book-multiple-outline" color={COLORS.primary} size={24} />
                                 )}>
                                 <TouchableOpacity onPress={() => {
                                     props.navigation.navigate("RootPengisianKrs", { screen: "PengisianKrs" })
                                 }}>
-                                    <List.Item title="Pengisisan Krs" />
+                                    <List.Item title="Pengisisan Krs" titleStyle={styles.title} left={(props) => (
+                                        <Icon name="book-multiple-outline" color={COLORS.primary} size={24} />
+                                    )} />
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => {
                                     props.navigation.navigate("RootTranskip", { screen: "Transkip" })
                                 }}>
-                                    <List.Item title="Transkip" />
+                                    <List.Item title="Transkip" titleStyle={styles.title} left={() => (
+                                        <Icon name="folder" color={COLORS.primary} size={24} />
+                                    )} />
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => {
                                     props.navigation.navigate("RootInfoUjian", {
                                         screen: "TopTabsUjian"
                                     })
                                 }}>
-                                    <List.Item title="Info Kuliah Ujian" />
+                                    <List.Item title="Info Kuliah Ujian" titleStyle={styles.title} left={() => (
+                                        <Icon name="folder" color={COLORS.primary} size={24} />
+                                    )} />
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => {
                                     props.navigation.navigate("RootRekapSpp", {
                                         screen: "RekapSpp"
                                     })
                                 }}>
-                                    <List.Item title="Rekap Spp" />
+                                    <List.Item title="Rekap Spp" titleStyle={styles.title} left={() => (
+                                        <Icon name="folder" color={COLORS.primary} size={24} />
+                                    )} />
                                 </TouchableOpacity>
                             </List.Accordion>
 
@@ -122,22 +132,22 @@ const DrawerContent = (props: any) => {
                                     });
                                 }}>
                                 <List.Item
+                                    titleStyle={styles.title}
                                     title="E-book"
                                     left={() => (
-                                        <Icon name="account-box-outline" color="black" size={24} />
+                                        <Icon name="account-box-outline" color={COLORS.primary} size={24} />
                                     )}
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    props.navigation.navigate('RootToko', {
-                                        screen: 'Toko',
-                                    });
+
                                 }}>
                                 <List.Item
                                     title="Folder Aside"
+                                    titleStyle={styles.title}
                                     left={() => (
-                                        <Icon name="folder" color="black" size={24} />
+                                        <Icon name="folder" color={COLORS.primary} size={24} />
                                     )}
                                 />
                             </TouchableOpacity>
@@ -151,7 +161,7 @@ const DrawerContent = (props: any) => {
                         onPress={signOut}>
                         <List.Item
                             title="Sing Out"
-                            left={() => <Icon name="exit-to-app" color="black" size={24} />}
+                            left={() => <Icon name="exit-to-app" color={COLORS.primary} size={24} />}
                         />
                     </TouchableOpacity>
                 </List.Section>
@@ -172,8 +182,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        marginTop: 3,
-        fontWeight: 'bold',
+        marginBottom: 3,
+        fontFamily: FONTS.family,
+        color: COLORS.textColor
     },
     caption: {
         fontSize: 14,

@@ -7,6 +7,7 @@ type PropsDasboard = {
 
 const Dasboard: React.FC<PropsDasboard> = ({ navigation }) => {
     const [state, setState] = useState();
+
     return (
         <View>
             <TouchableOpacity onPress={() => navigation.navigate("Transkip")}>

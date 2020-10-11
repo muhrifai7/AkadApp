@@ -142,7 +142,7 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar backgroundColor="#009387" barStyle="light-content" /> */}
+      <StatusBar backgroundColor={COLORS.primary} />
       <View style={styles.header}>
         <Text style={styles.text_header}>Wellcome!</Text>
       </View>
