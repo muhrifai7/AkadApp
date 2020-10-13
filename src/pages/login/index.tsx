@@ -15,11 +15,7 @@ import { Formik, getIn } from 'formik';
 import * as Yup from 'yup';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from '@react-native-community/google-signin';
+import Dialog from "react-native-dialog";
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -45,7 +41,8 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
     isValidPassword: true,
   };
   const [userInfo, setUserInfo] = useState(initialState);
-  const [loading, setLoading] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState<boolean>(false);
+  const [key, setKey] = useState<string>("")
   const [error, setError] = useState({});
 
   const textInputChange = (val: string) => {
@@ -132,17 +129,62 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
   };
 
   const handleSubmit = (values: any): any => {
-    _storeData()
-    navigation.navigate('DrawerNavigator', {
-      "RootDashBoard": {
-        screen: "DashBoard"
-      }
-    });
+    _storeData();
+    setDialogVisible(!dialogVisible)
+    // navigation.navigate('DrawerNavigator', {
+    //   "RootDashBoard": {
+    //     screen: "DashBoard"
+    //   }
+    // });
   };
+
+  const handleCancel = () => {
+    setDialogVisible(false)
+  };
+
+  const habldeAuthenticateKey = () => {
+    setDialogVisible(!dialogVisible)
+    if (key === "123456") {
+      setDialogVisible(!dialogVisible);
+      navigation.navigate('DrawerNavigator', {
+        "RootDashBoard": {
+          screen: "DashBoard"
+        }
+      });
+    }
+    else {
+      if (key.trim().length != 0) {
+        createAlert()
+      }
+    }
+
+  };
+
+  const createAlert = () =>
+    Alert.alert(
+      'Wrong Key',
+      'Key yang anda masukan salah',
+      [
+
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: false },
+    );
+  const handleChangeKey = (e: string) => {
+    console.log(e, 'vallll')
+    setKey(e)
+  }
+
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.primary} />
+      <Dialog.Container visible={dialogVisible} style={styles.dialog}>
+        <Dialog.Title>Konfirmasi Key</Dialog.Title>
+        <Dialog.Input placeholder="Masukan Key" style={styles.inputTextDialog} onChangeText={(e) => handleChangeKey(e)} value={key} />
+        <Dialog.Button label="Cancel" onPress={handleCancel} color="red" />
+        <Dialog.Button label="Send" onPress={habldeAuthenticateKey} />
+      </Dialog.Container>
       <View style={styles.header}>
         <Text style={styles.text_header}>Wellcome!</Text>
       </View>
@@ -338,4 +380,17 @@ const styles = StyleSheet.create({
   color_textPrivate: {
     color: COLORS.gray,
   },
+  inputTextDialog: {
+    color: '#555555',
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingTop: 5,
+    height: '100%',
+    borderColor: '#6E5BAA',
+    borderWidth: 1,
+    borderRadius: 4,
+  },
+  dialog: {
+    borderRadius: 6
+  }
 });
