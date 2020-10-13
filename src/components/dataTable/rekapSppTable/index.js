@@ -8,9 +8,9 @@ import {
   IconButton,
 } from 'material-bread';
 import Icon from 'react-native-vector-icons/Feather';
-import {COLORS, FONTS} from '../../contants';
+import {COLORS, FONTS} from '../../../contants';
 
-export default class Table extends React.Component {
+export default class RekapSppTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,46 +21,66 @@ export default class Table extends React.Component {
   render() {
     const data = [
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan.0',
-        sks: 'Achika Dwi Arofah4',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: `1. Uang Kegiatan Mahasiswa (IKM) 150.000
+2. Biaya Kuliah dan Praktek 8.950.000
+3. Biaya Pengembangan sarana dan prasarana 1.500.000
+Pembayaran Ke No.Rekening Bank:
+1. BNI SYARIAH 0755578889`,
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
       },
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan.0',
-        sks: 'Achika Dwi Arofah7',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: `1. Uang Kegiatan Mahasiswa (IKM) 150.000
+2. Biaya Kuliah dan Praktek 8.950.000
+3. Biaya Pengembangan sarana dan prasarana 1.500.000
+Pembayaran Ke No.Rekening Bank:
+1. BNI SYARIAH 0755578889`,
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        tagihan: 'Rp. 10.600.000 BELUM LUNAS',
       },
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan.4',
-        sks: 'Achika Dwi Arofah0',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: 'D III keterangan Keperawatan.4',
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        tagihan: 'Rp. 10.600.000 BELUM LUNAS',
       },
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan.0',
-        sks: 'Achika Dwi Arofah2',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: `1. Uang Kegiatan Mahasiswa (IKM) 150.000
+2. Biaya Kuliah dan Praktek 8.950.000
+3. Biaya Pengembangan sarana dan prasarana 1.500.000
+Pembayaran Ke No.Rekening Bank:
+1. BNI SYARIAH 0755578889`,
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
       },
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan5',
-        sks: 'Achika Dwi Arofah0',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: 'D III keterangan Keperawatan5',
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
       },
       {
-        tahun: '2019/2020-Ganjil',
-        kode: 'WAT102B',
-        mataKuliah: 'D III mataKuliah Keperawatan',
-        sks: 'Achika Dwi Arofah',
-        dosen: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
+        Tagihan: 'KEU0965Achika Dwi Arofah201901001',
+        tglTag: '2020-09-04',
+        keterangan: 'D III keterangan Keperawatan',
+        jurusan: `DIII KEPERAWATAN
+2020/2021-Ganjil III`,
+        pembayaran: 'Ns. Yuanita Panma, M.Kep.Sp.Kep.M.B',
       },
     ];
 
@@ -92,16 +112,22 @@ export default class Table extends React.Component {
                 <Text style={styles.headerText}>No</Text>
               </View>
               <View style={styles.header}>
-                <Text style={styles.headerText}>Kode</Text>
+                <Text style={styles.headerText}>Tagihan</Text>
               </View>
               <View style={styles.header}>
-                <Text style={styles.headerText}>Mata Kuliah</Text>
+                <Text style={styles.headerText}>Tanggal Tagihan</Text>
               </View>
               <View style={styles.header}>
-                <Text style={styles.headerText}>Sks</Text>
+                <Text style={styles.headerText}>Keterangan</Text>
               </View>
               <View style={styles.header}>
-                <Text style={styles.headerText}>Dosen</Text>
+                <Text style={styles.headerText}>Jurusan</Text>
+              </View>
+              <View style={styles.header}>
+                <Text style={styles.headerText}>Tagihan</Text>
+              </View>
+              <View style={styles.header}>
+                <Text style={styles.headerText}>Pembayaran</Text>
               </View>
             </View>
           </DataTableRow>
@@ -129,7 +155,7 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Text>{row.kode}</Text>
+                  <Text>{row.Tagihan}</Text>
                 </View>
                 <View
                   style={{
@@ -140,7 +166,7 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Text>{row.mataKuliah}</Text>
+                  <Text>{row.tglTag}</Text>
                 </View>
                 <View
                   style={{
@@ -151,7 +177,7 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Text>{row.sks}</Text>
+                  <Text>{row.keterangan}</Text>
                 </View>
                 <View
                   style={{
@@ -162,7 +188,18 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Text>{row.dosen}</Text>
+                  <Text>{row.jurusan}</Text>
+                </View>
+                <View
+                  style={{
+                    marginHorizontal: 10,
+                    paddingHorizontal: 5,
+                    flexWrap: 'wrap',
+                    width: 200,
+                    overflow: 'hidden',
+                    justifyContent: 'center',
+                  }}>
+                  <Text>{row.pembayaran}</Text>
                 </View>
                 {/* <View
                   style={{
@@ -173,7 +210,7 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Text>{row.sks}</Text>
+                  <Text>{row.jurusan}</Text>
                 </View>
                 <TouchableOpacity
                   onPress={createTwoButtonAlert}
@@ -184,7 +221,7 @@ export default class Table extends React.Component {
                     overflow: 'hidden',
                     justifyContent: 'center',
                   }}>
-                  <Icon sks="plus-square" color="green" size={30} />
+                  <Icon jurusan="plus-square" color="green" size={30} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={createTwoButtonAlert}

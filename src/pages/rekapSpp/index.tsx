@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, StatusBar } from 'react-native';
 
+
+import RekapSppTable from "../../components/dataTable/rekapSppTable"
+import { COLORS } from "../../contants"
 type PropsRekapSpp = {}
 
-const RekapSpp = () => {
+const RekapSpp = ({ navigation }: any) => {
     const [state, setState] = useState();
 
     return (
-        <View>
-            <Text>RekapSpp Screen</Text>
+        <View style={styles.container}>
+            <StatusBar backgroundColor={COLORS.primary} />
+
+            <RekapSppTable />
         </View>
     );
 }
@@ -16,5 +21,9 @@ const RekapSpp = () => {
 export default RekapSpp;
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        marginHorizontal: 5
+    }
 })

@@ -107,7 +107,7 @@ const DrawerContent = (props: any) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => {
                                     props.navigation.navigate("RootInfoUjian", {
-                                        screen: "TopTabsUjian"
+                                        screen: "BottomTabsUjian"
                                     })
                                 }}>
                                     <List.Item title="Info Kuliah Ujian" titleStyle={styles.title} left={() => (

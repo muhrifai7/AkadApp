@@ -15,13 +15,22 @@ const Drawer = createDrawerNavigator();
 const TopTab = createMaterialTopTabNavigator();
 const BottomTap = createBottomTabNavigator()
 
-const TopTabsUjian = () => {
+const BottomTabsUjian = () => {
   return (
     <BottomTap.Navigator>
       <BottomTap.Screen name="Jadwal Kuliah" component={JadwalKuliah} />
       <BottomTap.Screen name="Jadwal Ujian" component={JadwalUjian} />
       <BottomTap.Screen name="Cetak Kartu Ujian" component={CetakKartuUjian} />
     </BottomTap.Navigator>
+  );
+}
+
+const TopTapsKrs = () => {
+  return (
+    <TopTab.Navigator swipeEnabled={false}>
+      <TopTab.Screen name="Detail Krs" component={DetailKrs} />
+      <TopTab.Screen name="Rekap Spp" component={RekapSpp} />
+    </TopTab.Navigator>
   );
 }
 
@@ -139,8 +148,13 @@ const RootPengisianKrs = ({ navigation }: any) => {
         }}
       />
       <Stack.Screen
-        name="DetailKrs"
-        component={DetailKrs}
+        name="Krs"
+        component={TopTapsKrs}
+        options={{
+          headerStyle: {
+            backgroundColor: COLORS.primary
+          },
+        }}
       />
     </Stack.Navigator>)
 }
@@ -174,8 +188,8 @@ const RootInfoUjian = ({ navigation }: any) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="TopTabsUjian"
-        component={TopTabsUjian}
+        name="BottomTabsUjian"
+        component={BottomTabsUjian}
         options={{
           title: 'Dashboard',
           headerStyle: {
@@ -201,7 +215,7 @@ const RootRekapSpp = ({ navigation }: any) => {
         name="RekapSpp"
         component={RekapSpp}
         options={{
-          title: 'Dashboard',
+          title: 'Rekap Spp',
           headerStyle: {
             backgroundColor: COLORS.primary,
           },
