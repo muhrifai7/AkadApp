@@ -1,89 +1,277 @@
-import React, {Component} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import {Table, TableWrapper, Row, Cell} from 'react-native-table-component';
+import * as React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import DataTable from '../components/dataTable';
 
-export default class ExampleThree extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tableHead: [
-        'Head',
-        'Head2',
-        'Head3',
-        'Head4',
-        'Head5',
-        'Head6',
-        'Head7',
-        'Head8',
-        'Head9',
-      ],
-      widthArr: [40, 60, 80, 100, 120, 140, 160, 180, 200],
-      tableData: [
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd'],
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd'],
-      ],
-    };
-  }
+const TableKrs = () => {
+  let datatable = [
+    {
+      _id: '5d406a171ed43384972f04b5',
+      index: 0,
+      age: 28,
+      eyeColor: 'brown',
+      name: {
+        first: 'Myra',
+        last: 'Navarro',
+      },
+      company: 'SUSTENZA',
+      email: 'myra.navarro@sustenza.net',
+    },
+    {
+      _id: '5d406a170db0f4b04d9a9acf',
+      index: 1,
+      age: 23,
+      eyeColor: 'blue',
+      name: {
+        first: 'Harriett',
+        last: 'Tanner',
+      },
+      company: 'VALPREAL',
+      email: 'harriett.tanner@valpreal.com',
+    },
+    {
+      _id: '5d406a17e95da8ff80a759c5',
+      index: 2,
+      age: 39,
+      eyeColor: 'blue',
+      name: {
+        first: 'Vega',
+        last: 'Hanson',
+      },
+      company: 'BEDLAM',
+      email: 'vega.hanson@bedlam.tv',
+    },
+    {
+      _id: '5d406a175505da190e6875ec',
+      index: 3,
+      age: 31,
+      eyeColor: 'blue',
+      name: {
+        first: 'Rosemary',
+        last: 'Fields',
+      },
+      company: 'QUAILCOM',
+      email: 'rosemary.fields@quailcom.me',
+    },
+    {
+      _id: '5d406a17ea96044c027f4e50',
+      index: 4,
+      age: 27,
+      eyeColor: 'brown',
+      name: {
+        first: 'Dale',
+        last: 'Wilkinson',
+      },
+      company: 'QIAO',
+      email: 'dale.wilkinson@qiao.org',
+    },
+    {
+      _id: '5d406a17c5fff1ff6653a555',
+      index: 5,
+      age: 25,
+      eyeColor: 'blue',
+      name: {
+        first: 'Beatrice',
+        last: 'Contreras',
+      },
+      company: 'ZENOLUX',
+      email: 'beatrice.contreras@zenolux.us',
+    },
+    {
+      _id: '5d406a17a199efcba25e1f26',
+      index: 6,
+      age: 34,
+      eyeColor: 'blue',
+      name: {
+        first: 'Hancock',
+        last: 'Wynn',
+      },
+      company: 'PLASMOS',
+      email: 'hancock.wynn@plasmos.co.uk',
+    },
+    {
+      _id: '5d406a17019a2a4544a4f134',
+      index: 7,
+      age: 40,
+      eyeColor: 'blue',
+      name: {
+        first: 'Brown',
+        last: 'Stanton',
+      },
+      company: 'SNACKTION',
+      email: 'brown.stanton@snacktion.name',
+    },
+    {
+      _id: '5d406a17e516dd71af8210d4',
+      index: 8,
+      age: 39,
+      eyeColor: 'blue',
+      name: {
+        first: 'Barnes',
+        last: 'Dunn',
+      },
+      company: 'PORTALINE',
+      email: 'barnes.dunn@portaline.ca',
+    },
+    {
+      _id: '5d406a17516936a025b73c33',
+      index: 9,
+      age: 34,
+      eyeColor: 'green',
+      name: {
+        first: 'Blanche',
+        last: 'Cherry',
+      },
+      company: 'ISOSWITCH',
+      email: 'blanche.cherry@isoswitch.io',
+    },
+    {
+      _id: '5d406a17527a4d2c6a7897dd',
+      index: 10,
+      age: 33,
+      eyeColor: 'blue',
+      name: {
+        first: 'Gilliam',
+        last: 'Farley',
+      },
+      company: 'AMTAS',
+      email: 'gilliam.farley@amtas.biz',
+    },
+    {
+      _id: '5d406a175ff11478c416c30b',
+      index: 11,
+      age: 26,
+      eyeColor: 'brown',
+      name: {
+        first: 'Laura',
+        last: 'Short',
+      },
+      company: 'FISHLAND',
+      email: 'laura.short@fishland.info',
+    },
+    {
+      _id: '5d406a1738181b471847339a',
+      index: 12,
+      age: 20,
+      eyeColor: 'brown',
+      name: {
+        first: 'Moreno',
+        last: 'Barber',
+      },
+      company: 'KEENGEN',
+      email: 'moreno.barber@keengen.net',
+    },
+    {
+      _id: '5d406a17a6bcae6fe3ad1735',
+      index: 13,
+      age: 30,
+      eyeColor: 'brown',
+      name: {
+        first: 'Fischer',
+        last: 'French',
+      },
+      company: 'INCUBUS',
+      email: 'fischer.french@incubus.com',
+    },
+    {
+      _id: '5d406a17600ca53e8f63f263',
+      index: 14,
+      age: 30,
+      eyeColor: 'brown',
+      name: {
+        first: 'Donaldson',
+        last: 'Carr',
+      },
+      company: 'SUNCLIPSE',
+      email: 'donaldson.carr@sunclipse.tv',
+    },
+    {
+      _id: '5d406a17530655789a27174f',
+      index: 15,
+      age: 35,
+      eyeColor: 'green',
+      name: {
+        first: 'Sophia',
+        last: 'Payne',
+      },
+      company: 'PRISMATIC',
+      email: 'sophia.payne@prismatic.me',
+    },
+    {
+      _id: '5d406a175dbc687b4c7669d8',
+      index: 16,
+      age: 34,
+      eyeColor: 'green',
+      name: {
+        first: 'Simone',
+        last: 'Pollard',
+      },
+      company: 'DIGIGEN',
+      email: 'simone.pollard@digigen.org',
+    },
+    {
+      _id: '5d406a179f35ed326a6a5567',
+      index: 17,
+      age: 28,
+      eyeColor: 'green',
+      name: {
+        first: 'Yvette',
+        last: 'Daugherty',
+      },
+      company: 'CHILLIUM',
+      email: 'yvette.daugherty@chillium.us',
+    },
+  ];
+  let page = 2;
+  return (
+    <View style={styles.container}>
+      <ScrollView horizontal={true}>
+        <DataTable
+          header={[
+            {
+              name: 'No',
+              attr: 'index',
+            },
+            {
+              name: 'Tahun Ajar',
+              attr: 'email',
+            },
+            {
+              name: 'Semester',
+              attr: 'name.first',
+              sortDirection: 'ascending',
+            },
+            {
+              name: 'Jurusan',
+              attr: 'name.last',
+            },
+            {
+              name: 'Nama Mahasiswa',
+              attr: 'name.last',
+            },
+            {
+              name: 'Action',
+              attr: 'name.last',
+            },
+          ]}
+          datatable={datatable}
+          //page={page}
+          //perPage={4}
+          style={{backgroundColor: '#fff'}}
+        />
+      </ScrollView>
+    </View>
+  );
+};
 
-  render() {
-    const state = this.state;
-
-    const element = (data, index) => (
-      <TouchableOpacity onPress={() => this._alertIndex(index)}>
-        <View style={styles.btn}>
-          <Text style={styles.btnText}>button</Text>
-        </View>
-      </TouchableOpacity>
-    );
-
-    return (
-      <View style={styles.container}>
-        <ScrollView horizontal={true}>
-          <View>
-            <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-              <Row
-                data={state.tableHead}
-                widthArr={state.widthArr}
-                style={styles.header}
-                textStyle={styles.text}
-              />
-            </Table>
-            <ScrollView style={styles.dataWrapper}>
-              <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-                {state.tableData.map((rowData, index) => (
-                  <TableWrapper key={index} style={styles.row}>
-                    {rowData.map((cellData, cellIndex) => (
-                      <Cell
-                        key={cellIndex}
-                        data={
-                          cellIndex === 3 ? element(cellData, index) : cellData
-                        }
-                        textStyle={styles.text}
-                      />
-                    ))}
-                  </TableWrapper>
-                ))}
-              </Table>
-            </ScrollView>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-}
+export default TableKrs;
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
-  header: {height: 50, backgroundColor: '#537791'},
-  text: {textAlign: 'center', fontWeight: '100'},
-  dataWrapper: {marginTop: -1},
-  row: {height: 40, backgroundColor: '#E7E6E1'},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    // paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
 });

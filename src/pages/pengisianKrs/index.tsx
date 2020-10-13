@@ -1,30 +1,59 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 
 
 import Table from "../table"
 import { COLORS } from "../../contants"
+import { Searchbar } from 'react-native-paper';
+
 type PropsPengisianKrs = {}
 
 const PengisianKrs = ({ navigation }: any) => {
     const [state, setState] = useState();
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const onChangeSearch = (query: string) => setSearchQuery(query);
 
     return (
-        <View style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
             <StatusBar backgroundColor={COLORS.primary} />
-            <TouchableOpacity onPress={() => {
-                navigation.navigate("DetailKrs")
-            }}>
-                <Text>PengisianKrs Screen</Text>
-            </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={styles.title}>
+                    <Text style={styles.titleText} >Daftar KRS Mahasiswa</Text>
+                </View>
+                <View style={styles.searchBar}>
+                    <Searchbar
+
+                        placeholder="Search"
+                        onChangeText={onChangeSearch}
+                        value={searchQuery}
+                    />
+
+                </View>
+            </View>
+            <View>
+            </View>
             <Table />
 
-        </View>
+        </SafeAreaView>
     );
 }
 
 export default PengisianKrs;
 
 const styles = StyleSheet.create({
-
+    container: {
+        justifyContent: 'center',
+        alignSelf: "center"
+    },
+    title: {
+        paddingVertical: 5,
+    },
+    titleText: {
+        color: COLORS.textColor,
+        fontSize: 16
+    },
+    searchBar: {
+        width: 200,
+    }
 })

@@ -122,7 +122,7 @@ const RootPengisianKrs = ({ navigation }: any) => {
         name="PengisianKrs"
         component={PengisianKrs}
         options={{
-          title: 'Dashboard',
+          title: 'KRS',
           headerStyle: {
             backgroundColor: COLORS.primary,
           },
