@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   TextInput,
   Platform,
@@ -19,9 +19,10 @@ import Dialog from "react-native-dialog";
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import { SIZES, FONTS, COLORS } from '../../contants';
+import { postLogin } from '../../redux/ducks/action';
 
 
 type PropsLogin = {
@@ -44,6 +45,26 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
   const [dialogVisible, setDialogVisible] = useState<boolean>(false);
   const [key, setKey] = useState<string>("")
   const [error, setError] = useState({});
+  const [article, setArticle] = useState<[]>([]);
+
+  const dispatch = useDispatch();
+  // const articleData = useSelector(
+  //   (state: any) => state.krsStore.data,
+  //   shallowEqual,
+  // );
+  // useEffect(() => {
+  //   dispatch(postLogin("message"));
+  //   fetchData();
+  //   return () => { };
+  // }, [dispatch]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     setArticle(articleData);
+  //   } catch (error) {
+  //     console.log(error, 'erorr');
+  //   }
+  // };
 
   const textInputChange = (val: string) => {
     if (val.trim().length >= 4) {
@@ -155,6 +176,7 @@ const Login: React.FC<PropsLogin> = ({ navigation }) => {
     else {
       if (key.trim().length != 0) {
         createAlert()
+        setKey("")
       }
     }
 

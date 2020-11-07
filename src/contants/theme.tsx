@@ -10,6 +10,7 @@ export const COLORS = {
   sekunder2: '#331D10',
   white: '#FFFFFF',
   gray: '#6A6A6A',
+  card: "#bdc3c7",
   blue: '#006BFE',
   text: '#65696d',
   iconColor: "#00a8ff",

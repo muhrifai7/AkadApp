@@ -39,7 +39,7 @@ const PengisianKrs = ({ navigation }: any) => {
 
                         </View>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity>
+                    <TouchableOpacity>
                         <Ripple
                             rippleColor="#0984e3" style={styles.cardContainer}>
 
@@ -62,7 +62,7 @@ const PengisianKrs = ({ navigation }: any) => {
                             <View style={styles.header}><Text style={styles.detail}>2019/2020-Ganjil</Text><Text style={styles.detail}>1</Text><Text style={styles.detail}>DIII KEPERAWATAN</Text><Text style={styles.detail}>Achika Dwi Arofah</Text></View>
 
                         </Ripple>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
             {/* <Table /> */}
