@@ -16,7 +16,6 @@ export default (state = defaultState, {type, payload, id} = {}) => {
       let dataState = state.data.filter((value) => {
         return value.id !== id;
       });
-      console.log(dataState, 'dadddd');
       return {
         ...state,
         data: dataState,

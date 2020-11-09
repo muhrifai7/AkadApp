@@ -151,6 +151,18 @@ const DrawerContent = (props: any) => {
                                     )}
                                 />
                             </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    props.navigation.navigate("RootChatting", { screen: "Chatting" })
+                                }}>
+                                <List.Item
+                                    title="Tanya Dosen"
+                                    titleStyle={styles.title}
+                                    left={() => (
+                                        <Icon name="account-tie-outline" color={COLORS.primary} size={27} />
+                                    )}
+                                />
+                            </TouchableOpacity>
                         </List.Section>
                     </Drawer.Section>
                 </View>

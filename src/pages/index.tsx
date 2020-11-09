@@ -12,5 +12,6 @@ import JadwalKuliah from "./jadwalKuliah"
 import JadwalUjian from "./jadwalUjian"
 import RekapSpp from "./rekapSpp"
 import Ebook from "./ebook"
-
-export { SplashScreen, OnBoarding, DetailKrs, Login, Transkip, InfoUjian, PengisianKrs, Dashboard, Profile, CetakKartuUjian, RekapSpp, JadwalKuliah, JadwalUjian, Ebook };
+import Chatting from "./chatting"
+import Chat from "./chat"
+export { SplashScreen, OnBoarding, DetailKrs, Login, Transkip, InfoUjian, PengisianKrs, Dashboard, Profile, CetakKartuUjian, RekapSpp, JadwalKuliah, JadwalUjian, Ebook, Chatting, Chat };

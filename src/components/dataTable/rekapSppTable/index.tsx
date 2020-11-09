@@ -8,32 +8,34 @@ import { COLORS } from "../../../contants"
 import { deleteKrs } from "../../../redux/ducks/action"
 interface PropsTable {
   payloads?: ICard[],
-  handleDelete: (id: number) => void
+  handleDelete: (id: number) => void,
+  refresh: boolean,
+  handleRefresh: () => void
 }
 
 interface ICard {
   id: number;
-  userId: number;
-  title: string;
-  body: string
+  name: string;
+  username: string;
+  email: string;
+  address: string;
+  company: object
 }
 
-const Table = ({ payloads, handleDelete }: PropsTable) => {
+const Table = ({ payloads, handleDelete, refresh, handleRefresh }: PropsTable) => {
   const [current, setCurrentIndex] = useState<null | number>(null);
 
 
 
   const ListItem = ({ data }: any) => {
     return (
-      <View key={data.id} style={styles.container}>
+      <View style={styles.container}>
         <View>
-          <Text style={styles.list}>{data.title.slice(0, 28)}</Text>
+          <Text style={styles.list}>{data.email}</Text>
         </View>
         <TouchableOpacity onPress={() => handleDelete(data.id)}>
           <Icon name="delete" size={25} color="red" />
         </TouchableOpacity>
-
-
       </View>
     )
   }
@@ -43,6 +45,9 @@ const Table = ({ payloads, handleDelete }: PropsTable) => {
       data={payloads}
       renderItem={({ item }) =>
         <ListItem data={item} />}
+      keyExtractor={(item) => item.email}
+      refreshing={refresh}
+      onRefresh={handleRefresh}
     />
 
 

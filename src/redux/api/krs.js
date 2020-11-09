@@ -2,8 +2,7 @@ import * as Api from '../../utils/api';
 
 export async function GetKrs() {
   try {
-    console.log('get');
-    const response = await Api.fetchRequest('GET', `posts`);
+    const response = await Api.fetchRequest('GET', `users`);
     return response;
   } catch (error) {
     throw error;

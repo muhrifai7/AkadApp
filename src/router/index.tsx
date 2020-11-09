@@ -6,7 +6,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Icon from "react-native-vector-icons/Ionicons"
 import { View } from "react-native"
 
-import { SplashScreen, OnBoarding, Login, Ebook, RekapSpp, Dashboard, Profile, PengisianKrs, InfoUjian, Transkip, DetailKrs, CetakKartuUjian, JadwalKuliah, JadwalUjian } from '../pages';
+import { SplashScreen, OnBoarding, Login, Ebook, RekapSpp, Dashboard, Profile, PengisianKrs, InfoUjian, Transkip, DetailKrs, CetakKartuUjian, JadwalKuliah, JadwalUjian, Chatting, Chat } from '../pages';
 import DrawerContent from '../components/drawerContent';
 import { COLORS, FONTS } from "../contants"
 
@@ -35,7 +35,7 @@ const TopTapsKrs = () => {
 }
 
 
-const MainApp = () => {
+const MainApp = ({ navigation }: any) => {
   return (
     <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen
@@ -257,6 +257,50 @@ const RootEbook = ({ navigation }: any) => {
   )
 }
 
+const RootChatting = ({ navigation }: any) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        gestureEnabled: true,
+        gestureDirection: "horizontal",
+
+      }}
+      headerMode="float"
+    >
+      <Stack.Screen
+        name="Chatting"
+        component={Chatting}
+        options={{
+          title: 'Chatting',
+          headerStyle: {
+            backgroundColor: COLORS.primary
+          },
+
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily: FONTS.family
+          },
+          headerLeft: () => (
+            <View style={{ paddingLeft: 3 }}>
+              <Icon name="md-menu-outline" color="white" size={30} onPress={() => navigation.openDrawer()} />
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          title: 'Chat',
+          headerStyle: {
+            backgroundColor: COLORS.primary
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+    </Stack.Navigator>)
+}
+
 
 const DrawerNavigator = () => {
   return (
@@ -268,6 +312,8 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="RootInfoUjian" component={RootInfoUjian} />
       <Drawer.Screen name="RootRekapSpp" component={RootRekapSpp} />
       <Drawer.Screen name="RootEbook" component={RootEbook} />
+      <Drawer.Screen name="RootChatting" component={RootChatting} />
+
     </Drawer.Navigator>
   );
 };
