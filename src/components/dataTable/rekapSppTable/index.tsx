@@ -1,77 +1,50 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from "react-redux"
+import { GestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/AntDesign"
 
 import { COLORS } from "../../../contants"
-
+import { deleteKrs } from "../../../redux/ducks/action"
 interface PropsTable {
-  payloads: ICard[]
+  payloads?: ICard[],
+  handleDelete: (id: number) => void
 }
 
 interface ICard {
-  name: string;
-  code: string;
+  id: number;
+  userId: number;
+  title: string;
+  body: string
 }
 
-const Table = ({ payloads }: PropsTable) => {
+const Table = ({ payloads, handleDelete }: PropsTable) => {
   const [current, setCurrentIndex] = useState<null | number>(null);
 
-  return (
-    <View >
-      {payloads.map((item, index) => (
-        <View key={index} style={{
-          ...styles.container, marginHorizontal: 10,
-          paddingHorizontal: 10,
-        }}>
-          <View style={{
-            ...styles.container, display: 'flex',
-            flexDirection: 'row',
-          }}>
-            <View style={styles.content}>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.code}>KEUS1213</Text>
-            </View>
-            <View style={styles.content}>
-              <TouchableOpacity onPress={() => {
-                setCurrentIndex(index)
-              }}>
-                <Icon name='down' size={20} color={'green'} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {current === index &&
-            <View style={{
-              ...styles.container, display: 'flex',
-              flexDirection: 'row'
-            }}>
 
-              <View style={styles.detail}>
-                <View style={styles.dropContainer}>
-                  <Text>Tagihan</Text>
-                  <Text>Keu23214214</Text>
-                </View>
-                <View>
-                  <Text>Tagihan</Text>
-                </View>
 
-              </View>
-              {/* <View style={styles.detail}>
-                <Text>Keu23214214</Text>
-                <Text>12 November 2020</Text>
-                <Text>1. Praktikum 1.850.000
-                </Text>
-                <Text>2. Dana Kemahasiswaan 250.000
-             </Text><Text>3. SPP 5.050.000
-                Pembayaran Ke No.Rekening Bank:
-1. Bank BTN 0019301300000868</Text>
-              </View> */}
-
-            </View>
-          }
-
+  const ListItem = ({ data }: any) => {
+    return (
+      <View key={data.id} style={styles.container}>
+        <View>
+          <Text style={styles.list}>{data.title.slice(0, 28)}</Text>
         </View>
-      ))}
-    </View>
+        <TouchableOpacity onPress={() => handleDelete(data.id)}>
+          <Icon name="delete" size={25} color="red" />
+        </TouchableOpacity>
+
+
+      </View>
+    )
+  }
+
+  return (
+    <FlatList
+      data={payloads}
+      renderItem={({ item }) =>
+        <ListItem data={item} />}
+    />
+
 
   );
 }
@@ -80,33 +53,17 @@ export default Table;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.card,
-    borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 10,
-    overflow: 'hidden'
+    paddingHorizontal: 10,
+    borderBottomColor: "#aaa",
+    borderBottomWidth: 1,
+    marginVertical: 10,
   },
-  content: {
-    margin: 6
-  },
-  code: {
-    fontSize: 13
-  },
-  name: {
-    fontSize: 15
-  },
-  detailContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: 10
-  },
-  detail: {
-    backgroundColor: 'red',
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  dropContainer: {
-    backgroundColor: 'blue',
+  list: {
+    padding: 5,
+    // fontWeight: "600",
+    fontSize: 16
   }
 })

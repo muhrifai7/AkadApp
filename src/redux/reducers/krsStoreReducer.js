@@ -1,13 +1,25 @@
 const defaultState = {
   data: [],
+  isFetching: false,
 };
 
-export default (state = defaultState, action = {}) => {
-  switch (action.type) {
+export default (state = defaultState, {type, payload, id} = {}) => {
+  switch (type) {
     case 'GET_ARTICLE': {
       return {
         ...state,
-        data: action.payload,
+        data: payload,
+        isFetching: true,
+      };
+    }
+    case 'DELETE_KRS': {
+      let dataState = state.data.filter((value) => {
+        return value.id !== id;
+      });
+      console.log(dataState, 'dadddd');
+      return {
+        ...state,
+        data: dataState,
       };
     }
     default:

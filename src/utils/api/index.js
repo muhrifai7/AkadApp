@@ -4,11 +4,12 @@ import Config from 'react-native-config';
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH';
 
 export async function fetchRequest(method: Method, path, data) {
+  console.log(path, method, 'method');
   try {
     const token = undefined;
     if (token != undefined) {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos${''}`,
+        `https://jsonplaceholder.typicode.com/${path}`,
         {
           method,
           headers: {
@@ -28,7 +29,7 @@ export async function fetchRequest(method: Method, path, data) {
       }
     } else {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos`,
+        `https://jsonplaceholder.typicode.com/${path}`,
         {
           method,
           headers: {

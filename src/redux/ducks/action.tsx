@@ -1,4 +1,4 @@
 import { postLogin } from '../actions/authActions';
-import { getKrs } from "../actions/krsActions"
+import { getKrs, deleteKrs } from "../actions/krsActions"
 
-export { postLogin, getKrs }
+export { postLogin, getKrs, deleteKrs }

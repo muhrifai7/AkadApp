@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import Table from "../../components/dataTable"
 import { COLORS } from "../../contants"
 
 type PropsDetailKrs = {}
@@ -12,7 +11,6 @@ const DetailKrs = ({ navigation }: any) => {
         <View style={styles.container}>
             <StatusBar backgroundColor={COLORS.primary} />
 
-            <Table />
         </View>
     );
 }
