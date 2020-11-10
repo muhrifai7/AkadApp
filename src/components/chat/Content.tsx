@@ -42,10 +42,10 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         flex: 1,
-        marginTop: -20,
-        borderTopRightRadius: 26,
-        borderTopLeftRadius: 26,
-        paddingHorizontal: 20,
+        marginTop: -22,
+        paddingHorizontal: 13,
+        borderTopRightRadius: 29,
+        borderTopLeftRadius: 29,
         paddingTop: 20
     }
 })

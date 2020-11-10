@@ -14,11 +14,14 @@ const styles = StyleSheet.create({
     message: {
         margin: 10,
         padding: 10,
+        justifyContent: 'center',
         backgroundColor: 'white',
         borderColor: '#979797',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
+        alignSelf: 'flex-start',
+
     },
     incomingMessage: {
         alignSelf: 'flex-end',

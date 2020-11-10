@@ -25,7 +25,7 @@ const Header = ({ user }: PropsHeader) => {
                     <TouchableOpacity>
                         <Icon name="phone" size={26} color="white" />
                     </TouchableOpacity>
-                    <Gap width={10} />
+                    <Gap width={17} />
                     <TouchableOpacity>
                         <Icon name="video" size={26} color="white" />
                     </TouchableOpacity>
